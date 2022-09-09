@@ -365,7 +365,7 @@ class _LotteryDetailState extends State<LotteryDetail> {
                     ListTile(
                       title: Obx(
                         () => Text(
-                          "${contractLink.message.value}",
+                          contractLink.message.value,
                           textAlign: TextAlign.center,
                           style: bodySemiBold.copyWith(
                               color: contractLink.message.contains('error')

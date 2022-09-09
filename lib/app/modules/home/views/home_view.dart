@@ -55,9 +55,8 @@ class HomeView extends StatelessWidget {
           icon: const Icon(FontAwesomeIcons.github),
           onPressed: () async {
             const url = 'https://github.com/Mufaddal5253110/lottery-dapp';
-            await canLaunchUrl(Uri.parse(url))
-                ? await launchUrl(Uri.parse(url))
-                : throw 'Could not launch $url';
+            final canLunch = await launchUrl(Uri.parse(url));
+            if (!canLunch) throw 'Could not launch $url';
           },
         ),
         actions: [
@@ -416,8 +415,7 @@ class HomeView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       ListTile(
-                                        contentPadding:
-                                            const EdgeInsets.all(0),
+                                        contentPadding: const EdgeInsets.all(0),
                                         title: const Text(
                                           'Address',
                                           style: bodySemiBold,
@@ -427,8 +425,7 @@ class HomeView extends StatelessWidget {
                                         ),
                                       ),
                                       ListTile(
-                                        contentPadding:
-                                            const EdgeInsets.all(0),
+                                        contentPadding: const EdgeInsets.all(0),
                                         title: const Text(
                                           'Balance',
                                           style: bodySemiBold,
@@ -438,8 +435,7 @@ class HomeView extends StatelessWidget {
                                         ),
                                       ),
                                       ListTile(
-                                        contentPadding:
-                                            const EdgeInsets.all(0),
+                                        contentPadding: const EdgeInsets.all(0),
                                         title: const Text(
                                           'Account Name',
                                           style: bodySemiBold,

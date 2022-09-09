@@ -70,7 +70,7 @@ class ContractLinking extends GetxController
       ethToParticipate,
       getLotterySoldCount;
 
-  late ContractEvent LotteryCreated, WinnerDeclared, PlayerParticipated;
+  late ContractEvent lotteryCreated, winnerDeclared, playerParticipated;
 
   final managerAddress = ''.obs;
   final lotryname = ''.obs;
@@ -176,7 +176,7 @@ class ContractLinking extends GetxController
     getLotteries = _deployedContractLotteryGenerator.function('getLotteries');
     createLottery = _deployedContractLotteryGenerator.function('createLottery');
     deleteLottery = _deployedContractLotteryGenerator.function('deleteLottery');
-    LotteryCreated = _deployedContractLotteryGenerator.event('LotteryCreated');
+    lotteryCreated = _deployedContractLotteryGenerator.event('LotteryCreated');
     await getLotteriesList();
     // isLoading.value =true;
   }
@@ -204,8 +204,8 @@ class ContractLinking extends GetxController
     maxEntriesForPlayer =
         _deployedContractLottery.function('maxEntriesForPlayer');
     ethToParticipate = _deployedContractLottery.function('ethToParticipate');
-    WinnerDeclared = _deployedContractLottery.event('WinnerDeclared');
-    PlayerParticipated = _deployedContractLottery.event('PlayerParticipated');
+    winnerDeclared = _deployedContractLottery.event('WinnerDeclared');
+    playerParticipated = _deployedContractLottery.event('PlayerParticipated');
 
     await getManager();
     await getLotteryName();
@@ -298,7 +298,7 @@ class ContractLinking extends GetxController
       toBlock: const BlockNum.current(),
       topics: [
         [
-          bytesToHex(LotteryCreated.signature,
+          bytesToHex(lotteryCreated.signature,
               padToEvenLength: true, include0x: true)
         ],
       ],
@@ -314,7 +314,7 @@ class ContractLinking extends GetxController
       toBlock: const BlockNum.current(),
       topics: [
         [
-          bytesToHex(PlayerParticipated.signature,
+          bytesToHex(playerParticipated.signature,
               padToEvenLength: true, include0x: true)
         ],
       ],
@@ -330,7 +330,7 @@ class ContractLinking extends GetxController
       toBlock: const BlockNum.current(),
       topics: [
         [
-          bytesToHex(WinnerDeclared.signature,
+          bytesToHex(winnerDeclared.signature,
               padToEvenLength: true, include0x: true)
         ],
       ],
@@ -488,6 +488,7 @@ class ContractLinking extends GetxController
       privateKey: privateKey.value,
       name: nameController.text,
     );
+    // ignore: unrelated_type_equality_checks
     final existingUser = users.firstWhere((u) => u.address == userAddress,
         orElse: () => User(address: '', avatar: '', privateKey: '', name: ''));
     if (existingUser.address == '') {
